@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/egnaf/spring-boot-security-samples.svg)](https://travis-ci.org/egnaf/spring-boot-security-samples)
 
-# spring-boot-docker-samples
+# spring-boot-security-samples
 
 ## Stack
 - Spring Boot
