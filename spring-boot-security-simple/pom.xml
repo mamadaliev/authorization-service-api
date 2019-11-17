@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.company</groupId>
-    <artifactId>security-simple</artifactId>
+    <artifactId>app</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
