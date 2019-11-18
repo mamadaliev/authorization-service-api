@@ -2,12 +2,7 @@
 
 # spring-boot-security-samples
 
-## Stack
-- Spring Boot
-- Spring Security
-- Maven
-
-## Installation
+## Install
 To build and run Spring Boot application change path to project directory with `cd`, and run this application
 with `mvn`.
 ```bash
