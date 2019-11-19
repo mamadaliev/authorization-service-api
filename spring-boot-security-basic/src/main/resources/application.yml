@@ -24,9 +24,3 @@ spring:
     generate-ddl: true
     open-in-view: false
     show-sql: false
-
-logging:
-  level:
-    root: INFO
-    org.springframework.web: ERROR
-    org.hibernate: ERROR
