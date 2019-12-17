@@ -19,8 +19,14 @@ $ mvn spring-boot:run
 ```
 
 ## Authorization
+Authorization is the function of specifying access rights/privileges to resources, which is related to information
+security and computer security in general and to access control in particular. More formally, "to authorize" is
+to define an access policy.
 
 ## Authentication
+Authentication is the act of proving an assertion, such as the identity of a computer system user.
+In contrast with identification, the act of indicating a person or thing's identity, authentication is 
+the process of verifying that identity.
 
 ## Demo
 
