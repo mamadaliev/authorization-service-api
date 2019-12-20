@@ -2,9 +2,16 @@ server:
   port: 8065
   servlet:
     context-path: /api/1.0
+  error:
+    whitelabel:
+      enabled: false
+
 spring:
   profiles:
     active: development
+  devtools:
+    restart:
+      enabled: true
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/postgres
     username: root
@@ -18,3 +25,9 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
     generate-ddl: false
+
+security:
+  jwt:
+    token:
+      secret: secret
+      expire: 300000 # 1 hour
