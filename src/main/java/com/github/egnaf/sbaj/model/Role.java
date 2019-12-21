@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "roles")
 @Data
 @EqualsAndHashCode(callSuper = true)
-class Role extends Base {
+public class Role extends Base {
 
     @Column(name = "name")
     private String name;
