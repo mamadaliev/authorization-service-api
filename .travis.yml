@@ -7,7 +7,7 @@ cache:
     - $HOME/.m2
 
 script:
-  - cd backend && mvn -B verify && cd ..
+  - mvn -B verify && cd ..
 
 notifications:
   email:
