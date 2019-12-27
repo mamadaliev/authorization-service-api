@@ -1,4 +1,4 @@
-package com.github.egnaf.sbaj.model;
+package com.github.egnaf.sbaj.models;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,4 +26,10 @@ public class Base {
     @LastModifiedDate
     @Column(name = "updated")
     private Date updated;
+
+    public Base() {
+        this.status = Status.ACTIVE;
+        this.created = new Date();
+        this.updated = new Date();
+    }
 }
