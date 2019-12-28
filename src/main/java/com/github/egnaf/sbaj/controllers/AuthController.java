@@ -1,5 +1,6 @@
 package com.github.egnaf.sbaj.controllers;
 
+import com.github.egnaf.sbaj.dto.forms.LoginForm;
 import com.github.egnaf.sbaj.dto.forms.RegisterForm;
 import com.github.egnaf.sbaj.dto.UserDto;
 import com.github.egnaf.sbaj.models.User;
@@ -31,8 +32,8 @@ public class AuthController {
     }
 
     @PostMapping("/auth/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        return userService.login(username, password);
+    public String login(@RequestBody LoginForm user) {
+        return userService.login(user.getUsername(), user.getPassword());
     }
 
     @GetMapping(value = "/auth/whoami")
