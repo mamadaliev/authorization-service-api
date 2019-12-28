@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class CustomErrorHandler {
+public class CustomExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "No content")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ErrorHandlerResponse handleNotFoundException(NotFoundException e) {
         return new ErrorHandlerResponse(HttpStatus.NO_CONTENT.value(), e.getMessage());
     }
 
     @ExceptionHandler(AlreadyExistsException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Bad request")
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorHandlerResponse handleAlreadyExistsException(AlreadyExistsException e) {
         return new ErrorHandlerResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
     @ExceptionHandler(InvalidDataException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Expired or invalid JWT token")
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorHandlerResponse handleInvalidDataException(InvalidDataException e) {
         return new ErrorHandlerResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
