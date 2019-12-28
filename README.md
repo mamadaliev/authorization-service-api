@@ -2,21 +2,12 @@
 
 # spring-boot-auth-jwt
 
-- [Install](#Install)
 - [Authorization](#Authorization)
 - [Authentication](#Authentication)
+- [Install](#Install)
 - [Demo](#Demo)
 - [Contribute](#Contribute)
 - [License](#License)
-
-## Install
-To build the jar file, enter ``mvn clean install``, and to start the Spring Boot application, 
-enter ``mvn spring-boot:run``.
-
-```bash
-$ mvn clean install
-$ mvn spring-boot:run
-```
 
 ## Authorization
 Authorization is the function of specifying access rights/privileges to resources, which is related to information
@@ -28,7 +19,36 @@ Authentication is the act of proving an assertion, such as the identity of a com
 In contrast with identification, the act of indicating a person or thing's identity, authentication is 
 the process of verifying that identity.
 
+## Install
+To build the jar file, enter ``mvn clean install``, and to start the Spring Boot application, 
+enter ``mvn spring-boot:run``.
+
+```bash
+$ mvn clean install
+$ mvn spring-boot:run
+```
+
 ## Demo
+After running application, visit this page: [127.0.0.1:8065](http://127.0.0.1:8065)
+##### Registration
+```text
+curl -X POST http://127.0.0.1:8065/1.0/auth/register
+-d '{"username": "demo", "email": "demo@demo.com", "password": "12345678"}' 
+-H "Content-Type: application/json"
+```
+
+##### Authentication
+```text
+curl -X POST http://127.0.0.1:8065/1.0/auth/login
+-d '{"username": "demo", "password": "12345678"}' 
+-H {"Content-Type: application/json", "Authorization: Bearer {token}"}
+```
+
+##### List of users
+```text
+curl -X GET http://127.0.0.1:8065/1.0/users
+-H {"Content-Type: application/json", "Authorization: Bearer {token}"}
+```
 
 ## Contribute
 For any problems, comments, or feedback please create an issue 
