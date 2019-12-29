@@ -10,7 +10,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @Data
-public class BaseModel {
+public class Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class BaseModel {
     @Column(name = "updated")
     private Date updated;
 
-    public BaseModel() {
+    public Base() {
         this.status = Status.ACTIVE;
         this.created = new Date();
         this.updated = new Date();

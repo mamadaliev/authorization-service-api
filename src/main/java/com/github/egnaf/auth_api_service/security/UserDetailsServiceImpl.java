@@ -3,6 +3,7 @@ package com.github.egnaf.auth_api_service.security;
 import com.github.egnaf.auth_api_service.models.UserModel;
 import com.github.egnaf.auth_api_service.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,10 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserModel userModel = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User by username " + username + " not found"));
 
-        return org.springframework.security.core.userdetails.User
+        return User
                 .withUsername(username)
                 .password(userModel.getPassword())
-                .authorities(userModel.getRoleModels())
+                .authorities(userModel.getRoles())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
