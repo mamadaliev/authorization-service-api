@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/egnaf/spring-boot-auth-jwt.svg)](https://travis-ci.org/egnaf/spring-boot-auth-jwt)
+[![Build Status](https://travis-ci.org/egnaf/auth-api-service.svg)](https://travis-ci.org/egnaf/auth-api-service)
 
-# spring-boot-auth-jwt
+# auth-api-service
 
 - [Authorization](#Authorization)
 - [Authentication](#Authentication)
@@ -15,7 +15,7 @@ security and computer security in general and to access control in particular. M
 to define an access policy.
 
 ## Authentication
-Authentication is the act of proving an assertion, such as the identity of a computer system user.
+Authentication is the act of proving an assertion, such as the identity of a computer system userModel.
 In contrast with identification, the act of indicating a person or thing's identity, authentication is 
 the process of verifying that identity.
 
@@ -32,21 +32,21 @@ $ mvn spring-boot:run
 After running application, visit this page: [127.0.0.1:8065](http://127.0.0.1:8065)
 ##### Registration
 ```text
-curl -X POST http://127.0.0.1:8065/1.0/auth/register
--d '{"username": "demo", "email": "demo@demo.com", "password": "12345678"}' 
+curl -X POST http://localhost:8065/1.0/register
+-d '{"username": "egnaf", "email": "egnaf@yahoo.com", "password": "12345678"}' 
 -H "Content-Type: application/json"
 ```
 
 ##### Authentication
 ```text
-curl -X POST http://127.0.0.1:8065/1.0/auth/login
--d '{"username": "demo", "password": "12345678"}' 
--H {"Content-Type: application/json", "Authorization: Bearer {token}"}
+curl -X POST http://localhost:8065/1.0/login
+-d '{"username": "egnaf", "password": "12345678"}' 
+-H {"Content-Type: application/json"}
 ```
 
-##### List of users
+##### List of userModels
 ```text
-curl -X GET http://127.0.0.1:8065/1.0/users
+curl -X GET http://localhost:8065/1.0/userModels
 -H {"Content-Type: application/json", "Authorization: Bearer {token}"}
 ```
 
