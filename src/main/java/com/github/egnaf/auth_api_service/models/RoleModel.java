@@ -14,14 +14,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class RoleModel extends BaseModel implements GrantedAuthority {
+public class RoleModel extends Base implements GrantedAuthority {
 
     @Column(name = "name")
     private String name;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<UserModel> userModels;
+    private List<UserModel> users;
 
     public RoleModel(String name) {
         this.name = name;

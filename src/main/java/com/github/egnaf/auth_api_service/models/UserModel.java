@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Table(name = "users")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserModel extends BaseModel {
+public class UserModel extends Base {
 
     @Column(name = "username", unique = true, nullable = false, length = 12)
     @Size(min = 4, max = 12, message = "Minimum username length: 4 characters")
@@ -30,28 +30,28 @@ public class UserModel extends BaseModel {
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    private List<RoleModel> roleModels;
+    private List<RoleModel> roles;
 
     public UserModel() {
-        this.roleModels = new ArrayList<>();
+        this.roles = new ArrayList<>();
     }
 
     public UserModel(@Size(min = 4, max = 12, message = "Minimum username length: 4 characters") String username,
                      String email,
                      @Size(min = 8, message = "Minimum password length: 8 characters") String password,
-                     List<RoleModel> roleModels) {
+                     List<RoleModel> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.roleModels = roleModels;
+        this.roles = roles;JwtTokenFilter
     }
 
-    public List<RoleModel> getRoleModels() {
-        return roleModels;
+    public List<RoleModel> getRoles() {
+        return roles;
     }
 
     @Mapping("roles")
     public List<String> getRolesArray() {
-        return roleModels.stream().map(RoleModel::getName).collect(Collectors.toList());
+        return roles.stream().map(RoleModel::getName).collect(Collectors.toList());
     }
 }

@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
                 user.getEmail(),
                 passwordEncoder.encode(user.getPassword()),
                 new ArrayList<>());
-        savingUserModel.getRoleModels().add(new RoleModel("ROLE_USER"));
+        savingUserModel.getRoles().add(new RoleModel("ROLE_USER"));
         return userRepository.save(savingUserModel);
     }
 
@@ -84,10 +84,10 @@ public class UserServiceImpl implements UserService {
     public String register(UserModel userModel) {
         if (!userRepository.existsByUsername(userModel.getUsername())) {
             userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-            userModel.setRoleModels(new ArrayList<>());
-            userModel.getRoleModels().add(new RoleModel("ROLE_USER"));
+            userModel.setRoles(new ArrayList<>());
+            userModel.getRoles().add(new RoleModel("ROLE_USER"));
             userRepository.save(userModel);
-            return jwtTokenProvider.createToken(userModel.getUsername(), userModel.getRoleModels());
+            return jwtTokenProvider.createToken(userModel.getUsername(), userModel.getRoles());
         } else {
             throw new AlreadyExistsException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
             UserModel userModel = userRepository.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User by username " + username + " not found"));
 
-            return jwtTokenProvider.createToken(username, userModel.getRoleModels());
+            return jwtTokenProvider.createToken(username, userModel.getRoles());
 
         } catch (AuthenticationException e) {
             throw new InvalidDataException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
@@ -119,6 +119,6 @@ public class UserServiceImpl implements UserService {
     public String refresh(String username) {
         return jwtTokenProvider.createToken(username, userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User by username " + username + " not found"))
-                .getRoleModels());
+                .getRoles());
     }
 }
