@@ -9,6 +9,15 @@
 - [Contribute](#Contribute)
 - [License](#License)
 
+## Install
+To build the jar file, enter ``mvn clean install``, and to start the Spring Boot application, 
+enter ``mvn spring-boot:run``.
+
+```bash
+$ mvn clean install
+$ mvn spring-boot:run
+```
+
 ## Authorization
 Authorization is the function of specifying access rights/privileges to resources, which is related to information
 security and computer security in general and to access control in particular. More formally, "to authorize" is

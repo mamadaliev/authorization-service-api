@@ -43,7 +43,7 @@ public class UserModel extends Base {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.roles = roles;JwtTokenFilter
+        this.roles = roles;
     }
 
     public List<RoleModel> getRoles() {
