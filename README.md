@@ -61,7 +61,7 @@ curl -X GET http://localhost:8065/1.0/userModels
 
 ## Contribute
 For any problems, comments, or feedback please create an issue 
-[here](https://github.com/egnaf/spring-boot-auth-jwt/issues).
+[here](https://github.com/egnaf/auth-api-service/issues).
 <br>
 
 ## License
