@@ -7,7 +7,7 @@ cache:
     - $HOME/.m2
 
 script:
-  - mvn -B verify && cd ..
+  - mvn -B clean install && cd ..
 
 notifications:
   email:
