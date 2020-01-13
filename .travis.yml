@@ -1,13 +1,13 @@
 language: java
-jdk: openjdk8
+jdk: openjdk11
 install: true
 
 cache:
   directories:
-    - $HOME/.m2
+    - $HOME/.gradle
 
 script:
-  - mvn -B clean install && cd ..
+  - gradle build --refresh-dependencies && cd ..
 
 notifications:
   email:

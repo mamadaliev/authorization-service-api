@@ -1,12 +1,11 @@
 package com.github.egnaf.auth.services;
 
-import com.github.egnaf.auth.exceptions.NotFoundException;
 import com.github.egnaf.auth.models.RoleModel;
 import com.github.egnaf.auth.models.UserModel;
 import com.github.egnaf.auth.repositories.UserRepository;
 import com.github.egnaf.auth.utils.RandomIdentifier;
-import com.github.egnaf.auth.utils.TimestampHelper;
 import com.github.egnaf.auth.utils.Status;
+import com.github.egnaf.auth.utils.TimestampHelper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -55,8 +55,8 @@ public class UserServiceTest {
 
         users.put("user2", UserModel.builder()
                 .id(RandomIdentifier.generate("user2"))
-                .username("user1")
-                .email("user1@reckure.com")
+                .username("user2")
+                .email("user2@reckure.com")
                 .password(passwordEncoder.encode("u2_password"))
                 .roles(new HashSet<>())
                 .created(TimestampHelper.getCurrentTimestamp())
@@ -65,20 +65,21 @@ public class UserServiceTest {
                 .build());
         users.get("user2").getRoles().add(new RoleModel("ROLE_USER"));
 
+        users.put("user7", UserModel.builder()
+                .id(RandomIdentifier.generate("user7"))
+                .username("user7")
+                .email("user7@reckure.com")
+                .password(passwordEncoder.encode("u7_password"))
+                .roles(new HashSet<>())
+                .created(TimestampHelper.getCurrentTimestamp())
+                .updated(TimestampHelper.getCurrentTimestamp())
+                .status(Status.ACTIVE)
+                .build());
+        users.get("user7").getRoles().add(new RoleModel("ROLE_USER"));
+
         userRepository.save(users.get("user1"));
         userRepository.save(users.get("user2"));
-    }
-
-    @Test
-    public void getAll() {
-        //expected
-        List<UserModel> expectedUsers = new ArrayList<>(users.values());
-
-        //actual
-        List<UserModel> actualUsers = userService.getAll(2, 0, "id", false);
-
-        //equals
-        assertEquals(expectedUsers, actualUsers);
+        userRepository.save(users.get("user7"));
     }
 
     @Test
@@ -122,34 +123,6 @@ public class UserServiceTest {
         assertEquals(expectedUser.getUsername(), actualUser.getUsername());
         assertEquals(expectedUser.getStatus(), actualUser.getStatus());
         assertEquals(expectedUser.getRoles(), actualUser.getRoles());
-    }
-
-    @Test
-    public void delete() {
-        //init
-        String id = RandomIdentifier.generate("user4");
-
-        //expected
-        UserModel expectedUser = UserModel.builder()
-                .id(id)
-                .username("user4")
-                .email("user4@reckure.com")
-                .password(passwordEncoder.encode("user4_password"))
-                .roles(new HashSet<>())
-                .created(TimestampHelper.getCurrentTimestamp())
-                .updated(TimestampHelper.getCurrentTimestamp())
-                .status(Status.ACTIVE)
-                .build();
-        expectedUser.getRoles().add(new RoleModel("ROLE_USER"));
-
-        //actual
-        userService.delete("user4"); // void
-
-        try {
-            assertNull(userService.getById(id));
-        } catch (NotFoundException e) {
-            assertEquals("User by id " + id + " not found", e.getMessage());
-        }
     }
 
     @Test
