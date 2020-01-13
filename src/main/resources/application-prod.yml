@@ -1,0 +1,20 @@
+server:
+  port: 8065
+
+spring:
+  profiles:
+    active: prod
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/auth-db
+
+security:
+  token:
+    secret: "JkHang37ug3gad923gud1dandle00fd329jds2"
+    expire: 3600000
+    type: "bearer"
+
+dozer:
+  cache:
+    converter-by-dest-type-maxsize: 5000
+    super-type-maxsize: 5000
