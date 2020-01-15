@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final TokenProvider tokenProvider;
@@ -43,8 +45,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()//
                 .antMatchers("/login").permitAll()//
                 .antMatchers("/register").permitAll()//
-
-                // h2
                 .antMatchers("/users/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/demo").permitAll()
@@ -56,7 +56,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // If a user try to access a resource without having enough permissions
         http.exceptionHandling().accessDeniedPage("/error");
 
-        // Apply JWT
+        // Apply tokenProvider
         http.apply(new TokenFilterConfig(tokenProvider));
 
         // Optional, if you want to test the API from a browser

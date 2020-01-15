@@ -1,6 +1,5 @@
 package com.github.egnaf.auth.controllers;
 
-import com.github.egnaf.auth.exceptions.NotFoundException;
 import com.github.egnaf.auth.services.UserService;
 import com.github.egnaf.auth.transfers.UserTransfer;
 import lombok.extern.slf4j.Slf4j;
@@ -43,11 +42,14 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public UserTransfer getById(@PathVariable String id) throws NotFoundException, NumberFormatException {
-        UserTransfer user =  mapper.map(userService.getById(id), UserTransfer.class);
-        log.debug("Retrieved user by identifier: {}", user);
-        return user;
+    public UserTransfer getById(@PathVariable String id) {
+        return mapper.map(userService.getById(id), UserTransfer.class);
     }
 
-    //TODO: add method deleteById with PreAuthorize
+    @DeleteMapping("/users/{username}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void deleteByUsername(@PathVariable String username) {
+        userService.delete(username);
+    }
 }

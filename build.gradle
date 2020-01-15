@@ -46,3 +46,9 @@ dependencies {
     /* other */
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
 }
+
+def profile = 'dev'
+
+bootRun {
+    args = ["--spring.profiles.active=" + profile]
+}

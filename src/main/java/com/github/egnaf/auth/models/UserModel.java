@@ -1,6 +1,5 @@
 package com.github.egnaf.auth.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,10 +21,6 @@ public class UserModel extends BaseModel {
     private String email;
     private String password;
     private Set<RoleModel> roles;
-
-    @JsonProperty(value = "refresh_token")
     private String refreshToken;
-
-    @JsonProperty(value = "last_visit")
     private long lastVisit;
 }

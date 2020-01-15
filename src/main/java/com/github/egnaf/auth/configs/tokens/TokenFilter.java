@@ -2,7 +2,7 @@ package com.github.egnaf.auth.configs.tokens;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.egnaf.auth.exceptions.AuthenticationException;
-import com.github.egnaf.auth.transfers.errors.ExceptionResponse;
+import com.github.egnaf.auth.transfers.ErrorTransfer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -38,7 +38,7 @@ public class TokenFilter extends OncePerRequestFilter {
             }
         } catch (AuthenticationException e) {
             SecurityContextHolder.clearContext();
-            ExceptionResponse responseInfo = new ExceptionResponse(e.getMessage(), e.getHttpStatus());
+            ErrorTransfer responseInfo = new ErrorTransfer(e.getMessage(), e.getHttpStatus().value());
             httpServletResponse.resetBuffer();
             httpServletResponse.setStatus(e.getHttpStatus().value());
             httpServletResponse.setHeader("Content-Type", "application/json");
