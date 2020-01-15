@@ -1,6 +1,6 @@
 package com.github.egnaf.auth.controllers.errors;
 
-import com.github.egnaf.auth.transfers.errors.ErrorResponse;
+import com.github.egnaf.auth.transfers.ErrorTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -24,8 +24,8 @@ public class CustomErrorHandler implements ErrorController {
 
     @RequestMapping("/error")
     @ResponseBody
-    public ErrorResponse error(WebRequest request, HttpServletResponse response) {
-        return new ErrorResponse(response.getStatus(), getErrorAttributes(request));
+    public ErrorTransfer error(WebRequest request, HttpServletResponse response) {
+        return new ErrorTransfer(response.getStatus(), getErrorAttributes(request));
     }
 
     @Override

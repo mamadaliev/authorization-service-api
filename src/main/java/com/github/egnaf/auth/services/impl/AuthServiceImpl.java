@@ -3,7 +3,7 @@ package com.github.egnaf.auth.services.impl;
 import com.github.egnaf.auth.exceptions.AuthenticationException;
 import com.github.egnaf.auth.exceptions.NotFoundException;
 import com.github.egnaf.auth.repositories.UserRepository;
-import com.github.egnaf.auth.transfers.TokensTransfer;
+import com.github.egnaf.auth.transfers.AuthTransfer;
 import com.github.egnaf.auth.transfers.forms.LoginForm;
 import com.github.egnaf.auth.transfers.forms.RegisterForm;
 import com.github.egnaf.auth.configs.tokens.TokenProvider;
@@ -38,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public TokensTransfer register(RegisterForm registerForm) {
+    public AuthTransfer register(RegisterForm registerForm) {
         // checking that the user exists in the database
         if (!userRepository.existsByUsername(registerForm.getUsername())) {
 
@@ -66,7 +66,7 @@ public class AuthServiceImpl implements AuthService {
             userRepository.save(userModel);
 
             // create tokens transfer object and return it
-            return TokensTransfer.builder()
+            return AuthTransfer.builder()
                     .accessToken(tokenProvider.createAccessToken(userModel.getUsername(), userModel.getRoles()))
                     .refreshToken(refreshToken)
                     .tokenType(tokenProvider.getTokenType())
@@ -78,7 +78,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public TokensTransfer login(LoginForm loginForm) {
+    public AuthTransfer login(LoginForm loginForm) {
         try {
             // find user from database
             UserModel userModel = userRepository.findByUsername(loginForm.getUsername()).orElseThrow(() ->
@@ -102,7 +102,7 @@ public class AuthServiceImpl implements AuthService {
                     loginForm.getPassword()));
 
             // create tokens transfer object and return it
-            return TokensTransfer.builder()
+            return AuthTransfer.builder()
                     .accessToken(tokenProvider.createAccessToken(userModel.getUsername(), userModel.getRoles()))
                     .refreshToken(refreshToken)
                     .tokenType(tokenProvider.getTokenType())
@@ -130,7 +130,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public TokensTransfer refresh(String username, String refreshToken) {
+    public AuthTransfer refresh(String username, String refreshToken) {
         // get instance of user model by username from database
         Optional<UserModel> userModel = userRepository.findByUsername(username);
 
@@ -140,7 +140,7 @@ public class AuthServiceImpl implements AuthService {
             // update last visit date
             userModel.get().setLastVisit(TimestampHelper.getCurrentTimestamp());
 
-            return TokensTransfer.builder()
+            return AuthTransfer.builder()
                     .accessToken(tokenProvider.createAccessToken(username, userModel.get().getRoles()))
                     .refreshToken(tokenProvider.createRefreshToken())
                     .tokenType(tokenProvider.getTokenType())

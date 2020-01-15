@@ -82,7 +82,6 @@ public class TokenProvider {
         String username = getUsernameByToken(token);
         try {
             userDetails = userDetailsService.loadUserByUsername(username);
-            log.info("{}", userDetails.toString());
             return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
         } catch (UsernameNotFoundException e) {
             throw new AuthenticationException("The username " + username + " not found", HttpStatus.UNAUTHORIZED);
@@ -91,7 +90,6 @@ public class TokenProvider {
 
     public String getUsernameByToken(String token) {
         try {
-            log.info("Getting username by token");
             return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
         } catch (ExpiredJwtException e) {
             throw new AuthenticationException("Expired token", HttpStatus.UNAUTHORIZED);
@@ -110,7 +108,6 @@ public class TokenProvider {
         String token = req.getHeader("Authorization");
 
         if (token != null && token.startsWith("Bearer ")) {
-            log.info("Resolved token");
             return token.substring(7);
         }
         return null;
@@ -118,9 +115,7 @@ public class TokenProvider {
 
     public boolean validateToken(String token) {
         try {
-            log.info("Validating token");
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-            log.info("Validated token");
             return true;
         } catch (ExpiredJwtException e) {
             throw new AuthenticationException("Expired token", HttpStatus.UNAUTHORIZED);
