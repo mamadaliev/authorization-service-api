@@ -1,4 +1,4 @@
-package com.github.egnaf.auth.configs.tokens;
+package com.github.egnaf.auth.configs.security.auth;
 
 import org.junit.Test;
 
