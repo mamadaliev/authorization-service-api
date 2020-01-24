@@ -1,4 +1,4 @@
-package com.github.egnaf.auth.controllers.errors;
+package com.github.egnaf.auth.controllers.handlers;
 
 import com.github.egnaf.auth.transfers.ErrorTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
