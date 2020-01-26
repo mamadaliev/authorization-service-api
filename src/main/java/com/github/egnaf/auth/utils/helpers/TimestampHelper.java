@@ -1,4 +1,4 @@
-package com.github.egnaf.auth.utils;
+package com.github.egnaf.auth.utils.helpers;
 
 import java.sql.Timestamp;
 

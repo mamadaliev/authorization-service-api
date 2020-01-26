@@ -1,8 +1,8 @@
-package com.github.egnaf.auth.utils;
+package com.github.egnaf.auth.utils.helpers;
 
 import java.util.UUID;
 
-public class RandomIdentifier {
+public class RandomHelper {
 
     public static String generate() {
         return UUID.randomUUID().toString().replaceAll("-", "");
@@ -12,7 +12,7 @@ public class RandomIdentifier {
         if (key != null) {
             return UUID.nameUUIDFromBytes(key.getBytes()).toString().replaceAll("-", "");
         } else {
-            return RandomIdentifier.generate();
+            return RandomHelper.generate();
         }
     }
 }

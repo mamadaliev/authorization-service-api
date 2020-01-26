@@ -3,9 +3,9 @@ package com.github.egnaf.auth.services;
 import com.github.egnaf.auth.models.RoleModel;
 import com.github.egnaf.auth.models.UserModel;
 import com.github.egnaf.auth.repositories.UserRepository;
-import com.github.egnaf.auth.utils.RandomIdentifier;
-import com.github.egnaf.auth.utils.Status;
-import com.github.egnaf.auth.utils.TimestampHelper;
+import com.github.egnaf.auth.utils.helpers.RandomHelper;
+import com.github.egnaf.auth.utils.enums.Status;
+import com.github.egnaf.auth.utils.helpers.TimestampHelper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class UserServiceTest {
     public void setUp() throws Exception {
         //expected
         users.put("user1", UserModel.builder()
-                .id(RandomIdentifier.generate("user1"))
+                .id(RandomHelper.generate("user1"))
                 .username("user1")
                 .email("user1@reckure.com")
                 .password(passwordEncoder.encode("u1_password"))
@@ -54,7 +54,7 @@ public class UserServiceTest {
         users.get("user1").getRoles().add(new RoleModel("ROLE_USER"));
 
         users.put("user2", UserModel.builder()
-                .id(RandomIdentifier.generate("user2"))
+                .id(RandomHelper.generate("user2"))
                 .username("user2")
                 .email("user2@reckure.com")
                 .password(passwordEncoder.encode("u2_password"))
@@ -66,7 +66,7 @@ public class UserServiceTest {
         users.get("user2").getRoles().add(new RoleModel("ROLE_USER"));
 
         users.put("user7", UserModel.builder()
-                .id(RandomIdentifier.generate("user7"))
+                .id(RandomHelper.generate("user7"))
                 .username("user7")
                 .email("user7@reckure.com")
                 .password(passwordEncoder.encode("u7_password"))
@@ -88,7 +88,7 @@ public class UserServiceTest {
         UserModel expectedUser = users.get("user1");
 
         //actual
-        UserModel actualUser = userService.getById(RandomIdentifier.generate("user1"));
+        UserModel actualUser = userService.getById(RandomHelper.generate("user1"));
 
         //equals
         assertEquals(expectedUser, actualUser);
@@ -97,7 +97,7 @@ public class UserServiceTest {
     @Test
     public void add() {
         //init
-        String id = RandomIdentifier.generate("user3");
+        String id = RandomHelper.generate("user3");
 
         //expected
         UserModel expectedUser = UserModel.builder()
@@ -128,7 +128,7 @@ public class UserServiceTest {
     @Test
     public void search() {
         //init
-        String id = RandomIdentifier.generate("user5");
+        String id = RandomHelper.generate("user5");
 
         //expected
         UserModel expectedUser = UserModel.builder()

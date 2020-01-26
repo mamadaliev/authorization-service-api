@@ -2,7 +2,7 @@ package com.github.egnaf.auth.configs.security;
 
 import com.github.egnaf.auth.exceptions.AuthenticationException;
 import com.github.egnaf.auth.models.RoleModel;
-import com.github.egnaf.auth.utils.RandomIdentifier;
+import com.github.egnaf.auth.utils.helpers.RandomHelper;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class TokenProvider {
     }
 
     public String createRefreshToken() {
-        return RandomIdentifier.generate();
+        return RandomHelper.generate();
     }
 
     public long getExpire() {
