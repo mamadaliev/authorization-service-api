@@ -1,6 +1,7 @@
 package com.github.egnaf.auth.controllers;
 
 import com.github.egnaf.auth.services.AuthService;
+import com.github.egnaf.auth.services.MailService;
 import com.github.egnaf.auth.transfers.AuthTransfer;
 import com.github.egnaf.auth.transfers.UserTransfer;
 import com.github.egnaf.auth.transfers.forms.LoginForm;
@@ -22,17 +23,23 @@ public class AuthController {
 
     private final Mapper mapper;
     private final AuthService authService;
+    private final MailService mailService;
 
     @Autowired
-    public AuthController(Mapper mapper, AuthService authService) {
+    public AuthController(Mapper mapper, AuthService authService, MailService mailService) {
         this.mapper = mapper;
         this.authService = authService;
+        this.mailService = mailService;
     }
 
     @PostMapping("/register")
     @ResponseStatus(code = HttpStatus.CREATED)
     public AuthTransfer register(@RequestBody RegisterForm registerForm) {
-        return authService.register(registerForm);
+        mailService.send(registerForm.getEmail(),
+                "Registration successfully finished!",
+                "Hello, you are registered on our web application.");
+        AuthTransfer authTransfer =  authService.register(registerForm);
+        return authTransfer;
     }
 
     @PostMapping("/login")

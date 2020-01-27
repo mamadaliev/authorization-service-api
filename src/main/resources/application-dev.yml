@@ -8,7 +8,23 @@ spring:
     active: dev
   data:
     mongodb:
-      uri: mongodb://localhost:27017/auth-db
+#      uri: mongodb://localhost:27017/auth-db
+      uri: mongodb+srv://admin:pass1234@cluster0-dpp5v.mongodb.net/test?retryWrites=true&w=majority
+  mail:
+    host: smtp.mail.yahoo.com
+    port: 587
+    username: egnaf
+    password: 151196Zc!$@#yahoo
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls: # TLS , port 587
+            enable: true
+            required: true
 
 security:
   token:
