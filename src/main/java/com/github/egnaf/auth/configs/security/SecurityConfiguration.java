@@ -1,4 +1,4 @@
-package com.github.egnaf.auth.configs.tokens;
+package com.github.egnaf.auth.configs.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class TokenFilterConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+public class SecurityConfiguration extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     private final TokenProvider tokenProvider;
 
     @Autowired
-    public TokenFilterConfig(TokenProvider tokenProvider) {
+    public SecurityConfiguration(TokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 
     @Override
     public void configure(HttpSecurity builder) {
-        builder.addFilterBefore(new TokenFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+        builder.addFilterBefore(new AccessFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
 }

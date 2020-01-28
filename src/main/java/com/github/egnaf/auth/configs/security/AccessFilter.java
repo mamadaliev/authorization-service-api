@@ -1,4 +1,4 @@
-package com.github.egnaf.auth.configs.tokens;
+package com.github.egnaf.auth.configs.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.egnaf.auth.exceptions.AuthenticationException;
@@ -18,12 +18,12 @@ import java.io.IOException;
 
 @Component
 @Slf4j
-public class TokenFilter extends OncePerRequestFilter {
+public class AccessFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
 
     @Autowired
-    public TokenFilter(TokenProvider tokenProvider) {
+    public AccessFilter(TokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 

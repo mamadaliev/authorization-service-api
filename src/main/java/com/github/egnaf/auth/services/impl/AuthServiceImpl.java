@@ -6,7 +6,7 @@ import com.github.egnaf.auth.repositories.UserRepository;
 import com.github.egnaf.auth.transfers.AuthTransfer;
 import com.github.egnaf.auth.transfers.forms.LoginForm;
 import com.github.egnaf.auth.transfers.forms.RegisterForm;
-import com.github.egnaf.auth.configs.tokens.TokenProvider;
+import com.github.egnaf.auth.configs.security.TokenProvider;
 import com.github.egnaf.auth.models.RoleModel;
 import com.github.egnaf.auth.models.UserModel;
 import com.github.egnaf.auth.services.AuthService;

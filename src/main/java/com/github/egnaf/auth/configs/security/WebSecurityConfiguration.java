@@ -1,7 +1,5 @@
-package com.github.egnaf.auth.configs;
+package com.github.egnaf.auth.configs.security;
 
-import com.github.egnaf.auth.configs.tokens.TokenFilterConfig;
-import com.github.egnaf.auth.configs.tokens.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,7 +55,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/error");
 
         // Apply tokenProvider
-        http.apply(new TokenFilterConfig(tokenProvider));
+        http.apply(new SecurityConfiguration(tokenProvider));
 
         // Optional, if you want to test the API from a browser
         // http.httpBasic();

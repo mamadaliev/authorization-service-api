@@ -1,4 +1,4 @@
-package com.github.egnaf.auth.configs.tokens;
+package com.github.egnaf.auth.configs.security;
 
 import com.github.egnaf.auth.exceptions.AuthenticationException;
 import com.github.egnaf.auth.models.RoleModel;
