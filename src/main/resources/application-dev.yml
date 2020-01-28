@@ -1,0 +1,22 @@
+server:
+  port: 8065
+  servlet:
+    context-path: /auth/0.1
+
+spring:
+  profiles:
+    active: dev
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/auth-db
+
+security:
+  token:
+    secret: "secret"
+    expire: 3600000
+    type: "bearer"
+
+dozer:
+  cache:
+    converter-by-dest-type-maxsize: 5000
+    super-type-maxsize: 5000
