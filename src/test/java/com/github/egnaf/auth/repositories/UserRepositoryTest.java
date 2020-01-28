@@ -2,9 +2,9 @@ package com.github.egnaf.auth.repositories;
 
 import com.github.egnaf.auth.models.RoleModel;
 import com.github.egnaf.auth.models.UserModel;
-import com.github.egnaf.auth.utils.RandomIdentifier;
-import com.github.egnaf.auth.utils.TimestampHelper;
-import com.github.egnaf.auth.utils.Status;
+import com.github.egnaf.auth.utils.helpers.RandomHelper;
+import com.github.egnaf.auth.utils.helpers.TimestampHelper;
+import com.github.egnaf.auth.utils.enums.Status;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +37,7 @@ public class UserRepositoryTest {
     public void setUp() throws Exception {
         //expected
         users.put("user1", UserModel.builder()
-                .id(RandomIdentifier.generate("user1"))
+                .id(RandomHelper.generate("user1"))
                 .username("user1")
                 .email("user1@reckure.com")
                 .password(passwordEncoder.encode("u1_password"))
@@ -49,7 +49,7 @@ public class UserRepositoryTest {
         users.get("user1").getRoles().add(new RoleModel("ROLE_USER"));
 
         users.put("user2", UserModel.builder()
-                .id(RandomIdentifier.generate("user2"))
+                .id(RandomHelper.generate("user2"))
                 .username("user1")
                 .email("user1@reckure.com")
                 .password(passwordEncoder.encode("u2_password"))
@@ -77,7 +77,7 @@ public class UserRepositoryTest {
     @Test
     public void findByUsername() {
         //data
-        String id = RandomIdentifier.generate("user3");
+        String id = RandomHelper.generate("user3");
 
         //expected
         UserModel expectedUser = UserModel.builder()
@@ -99,7 +99,7 @@ public class UserRepositoryTest {
     @Test
     public void deleteByUsername() {
         //data
-        String id = RandomIdentifier.generate("user3");
+        String id = RandomHelper.generate("user3");
 
         //expected
         UserModel expectedUser = UserModel.builder()

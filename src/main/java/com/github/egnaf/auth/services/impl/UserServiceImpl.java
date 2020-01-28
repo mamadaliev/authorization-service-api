@@ -6,9 +6,9 @@ import com.github.egnaf.auth.repositories.UserRepository;
 import com.github.egnaf.auth.services.UserService;
 import com.github.egnaf.auth.models.RoleModel;
 import com.github.egnaf.auth.models.UserModel;
-import com.github.egnaf.auth.utils.RandomIdentifier;
-import com.github.egnaf.auth.utils.Status;
-import com.github.egnaf.auth.utils.TimestampHelper;
+import com.github.egnaf.auth.utils.helpers.RandomHelper;
+import com.github.egnaf.auth.utils.enums.Status;
+import com.github.egnaf.auth.utils.helpers.TimestampHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.existsByUsername(userModel.getUsername())
                 && !userRepository.existsByEmail(userModel.getEmail())) {
             UserModel user = UserModel.builder()
-                    .id(RandomIdentifier.generate(userModel.getUsername()))
+                    .id(RandomHelper.generate(userModel.getUsername()))
                     .username(userModel.getUsername())
                     .email(userModel.getEmail())
                     .password(passwordEncoder.encode(userModel.getPassword()))

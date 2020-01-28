@@ -10,9 +10,9 @@ import com.github.egnaf.auth.configs.security.TokenProvider;
 import com.github.egnaf.auth.models.RoleModel;
 import com.github.egnaf.auth.models.UserModel;
 import com.github.egnaf.auth.services.AuthService;
-import com.github.egnaf.auth.utils.RandomIdentifier;
-import com.github.egnaf.auth.utils.Status;
-import com.github.egnaf.auth.utils.TimestampHelper;
+import com.github.egnaf.auth.utils.helpers.RandomHelper;
+import com.github.egnaf.auth.utils.enums.Status;
+import com.github.egnaf.auth.utils.helpers.TimestampHelper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
             // create instance of user model and fill it
             UserModel userModel = UserModel.builder()
-                    .id(RandomIdentifier.generate(registerForm.getUsername()))
+                    .id(RandomHelper.generate(registerForm.getUsername()))
                     .username(registerForm.getUsername())
                     .email(registerForm.getEmail())
                     .password(passwordEncoder.encode(registerForm.getPassword()))

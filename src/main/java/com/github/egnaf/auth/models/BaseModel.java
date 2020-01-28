@@ -1,7 +1,7 @@
 package com.github.egnaf.auth.models;
 
-import com.github.egnaf.auth.utils.RandomIdentifier;
-import com.github.egnaf.auth.utils.Status;
+import com.github.egnaf.auth.utils.helpers.RandomHelper;
+import com.github.egnaf.auth.utils.enums.Status;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
@@ -19,7 +19,7 @@ public class BaseModel {
     private long updated;
 
     public BaseModel() {
-        this.setId(RandomIdentifier.generate());
+        this.setId(RandomHelper.generate());
         this.status = Status.ACTIVE;
         this.created = new Timestamp(System.currentTimeMillis()).getTime();
         this.updated = new Timestamp(System.currentTimeMillis()).getTime();
